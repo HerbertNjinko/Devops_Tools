@@ -16,14 +16,14 @@ provider "aws" {
 
 
 terraform {
-  /*cloud {
+  cloud {
     organization = "Abingwas-Foundation"
 
     workspaces {
       name = "Devops_Tools"
     }
   }
-  */
+  
   required_providers {
     aws = {
       source = "hashicorp/aws"
