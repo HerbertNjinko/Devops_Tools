@@ -16,21 +16,20 @@ provider "aws" {
 
 
 terraform {
-  cloud {
+  /*cloud {
     organization = "Abingwas-Foundation"
 
     workspaces {
       name = "Devops_Tools"
     }
   }
+  */
   required_providers {
     aws = {
       source = "hashicorp/aws"
       version = "5.13.1"
     }
 }
-}
 
-provider "aws" {
-  region = "us-west-1"
+  required_version = ">= 0.14.0"
 }
