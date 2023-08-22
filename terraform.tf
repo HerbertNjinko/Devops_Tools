@@ -20,7 +20,7 @@ terraform {
     organization = "Abingwas-Foundation"
 
     workspaces {
-      name = "K8s_setup"
+      name = "Devops_Tools"
     }
   }
   required_providers {
@@ -32,6 +32,5 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
   region = "us-west-1"
 }
