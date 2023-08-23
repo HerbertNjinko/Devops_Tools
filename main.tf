@@ -13,18 +13,18 @@ module "vpc" {
   enable_vpn_gateway = false
 
   tags = {
-    Terraform = "true"
+    Terraform   = "true"
     Environment = "dev"
   }
 }
 
 
 resource "aws_launch_configuration" "kubernetes" {
-  name_prefix     = "kubernetes-terraform-aws-asg-"
-  image_id        = "ami-096c86b99bfee4865"
-  instance_type   = "t2.large"
-  security_groups = [aws_security_group.kubernetes_instance.id]
-  key_name     = "ec2-key"
+  name_prefix                 = "kubernetes-terraform-aws-asg-"
+  image_id                    = "ami-096c86b99bfee4865"
+  instance_type               = "t2.large"
+  security_groups             = [aws_security_group.kubernetes_instance.id]
+  key_name                    = "ec2-key"
   associate_public_ip_address = true
   lifecycle {
     create_before_destroy = true
@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "kubernetes" {
   launch_configuration = aws_launch_configuration.kubernetes.name
   vpc_zone_identifier  = module.vpc.public_subnets
 
-  health_check_type    = "ELB"
+  health_check_type = "ELB"
 
   tag {
     key                 = "Name"
@@ -77,7 +77,7 @@ resource "aws_lb_target_group" "kubernetes" {
 
 resource "aws_autoscaling_attachment" "kubernetes" {
   autoscaling_group_name = aws_autoscaling_group.kubernetes.id
-  lb_target_group_arn   = aws_lb_target_group.kubernetes.arn
+  lb_target_group_arn    = aws_lb_target_group.kubernetes.arn
 }
 
 resource "aws_security_group" "kubernetes_instance" {
@@ -90,10 +90,10 @@ resource "aws_security_group" "kubernetes_instance" {
   }
 
   egress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    cidr_blocks     = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   vpc_id = module.vpc.vpc_id
